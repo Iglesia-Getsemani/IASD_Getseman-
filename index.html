@@ -27,18 +27,27 @@
   *{ box-sizing: border-box; }
 
   html,body{
-    margin:20px; padding:0px; height:100%;
+    margin:0; padding:0px; min-height:100%;
     font-family: 'IBM Plex Sans', sans-serif;
     color: var(--ink);
   }
 
   body{
     display:flex;
-    align-items:center;
+    align-items:safe center;
     justify-content:center;
     min-height:100vh;
+    min-height:100dvh;
+    overflow-y:auto;
     background: url('imagenes/fondo.png') center center / cover no-repeat fixed;
     background-color: var(--paper); /* respaldo mientras carga o si no se encuentra la imagen */
+  }
+
+  @media (max-width: 480px){
+    body{
+      /* background-attachment:fixed da problemas de rendimiento/scroll en iOS Safari */
+      background-attachment: scroll;
+    }
   }
 
   /* subtle paper grain */
@@ -53,15 +62,16 @@
   .stage{
     flex:1;
     display:flex;
-    align-items:center;
+    align-items:safe center;
     justify-content:center;
     padding: 40px 32px;
+    width:100%;
     position:relative;
     z-index:1;
   }
 
   .card-wrap{
-    width:50%;
+    width:100%;
     max-width: 420px;
   }
 
@@ -309,6 +319,32 @@
 
   @media (max-width: 880px){
     .stage{ padding: 32px 20px 56px; }
+  }
+
+  @media (max-width: 480px){
+    .stage{ padding: 20px 14px 40px; }
+
+    .card{
+      padding: 28px 22px 26px;
+      border-radius: 0 8px 8px 8px;
+    }
+
+    .panel-title{ font-size: 21px; }
+    .panel-sub{ font-size: 13.5px; margin-bottom: 22px; }
+
+    .tab{
+      font-size: 11px;
+      padding: 10px 6px 12px;
+    }
+
+    .tabs{ padding-left: 12px; }
+
+    .oauth-row{ flex-direction: column; }
+
+    .row-between{
+      flex-wrap: wrap;
+      gap: 10px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce){
